@@ -329,7 +329,7 @@ function DevicesManager() {
                                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                                 />
                                                 <HandleMoveMap></HandleMoveMap>
-                                                <Marker position={position}>
+                                                <Marker position={[lat, lon]}>
                                                 </Marker>
                                             </MapContainer>
                                         </div>
