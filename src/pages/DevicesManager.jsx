@@ -37,11 +37,12 @@ function DevicesManager() {
     const [addMessage, setAddMessage] = useState('')
     const username = localStorage.getItem('username');
     const [loginMessage, setLoginMessage] = useState('');
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         // Fetch data from the protected route using the stored token
         const token = localStorage.getItem('token');
-        axios.get('https://noisemon.svec.co.th/api/home', { headers: { Authorization: token } })
+        axios.get(`${import.meta.env.VITE_API_URI}/api/home`, { headers: { Authorization: token } })
             .then((response) => {
                 setLoginMessage(response.data.loginMessage);
             })
@@ -58,7 +59,7 @@ function DevicesManager() {
 
 
     useEffect(() => {
-        axios.get(`https://noisemon.svec.co.th/api/Devices/${username}`)
+        axios.get(`${import.meta.env.VITE_API_URI}/api/Devices/${username}`, { headers: { Authorization: token } })
             .then(response => {
                 setData(response.data);
             })
@@ -105,7 +106,7 @@ function DevicesManager() {
             });
             return
         }
-        axios.post('https://noisemon.svec.co.th/api/newDevice', { newDeviceName, newDeviceSerial, lat, lon, username })
+        axios.post(`${import.meta.env.VITE_API_URI}/api/newDevice`, { newDeviceName, newDeviceSerial, lat, lon, username }, { headers: { Authorization: token } })
             .then((response) => {
                 setAddMessage(response.data);
                 setShow(false);
@@ -138,7 +139,7 @@ function DevicesManager() {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://noisemon.svec.co.th/api/deleteDevice/${id}`)
+                axios.delete(`${import.meta.env.VITE_API_URI}/api/deleteDevice/${id}`, { headers: { Authorization: token } })
                     .then((response) => {
                         setAddMessage(response.data);
                         Swal.fire({
@@ -157,7 +158,7 @@ function DevicesManager() {
 
     const HandleUpdateDevice = (e) => {
         e.preventDefault()
-        axios.put(`https://noisemon.svec.co.th/api/updateDevice/${id}`, { newDeviceName, newDeviceSerial, lat, lon, username })
+        axios.put(`${import.meta.env.VITE_API_URI}/api/updateDevice/${id}`, { newDeviceName, newDeviceSerial, lat, lon, username }, { headers: { Authorization: token } })
             .then((response) => {
                 setAddMessage(response.data);
                 setShow(false);

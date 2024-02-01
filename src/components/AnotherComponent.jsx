@@ -13,10 +13,10 @@ import Col from 'react-bootstrap/Col';
 function AnotherComponent({ selectedDevices, messages }) {
     const [data, setData] = useState([]);
     // Filter messages based on selected devices
-    const filteredMessages = messages.filter(device => device.name === selectedDevices);
+    const token = localStorage.getItem('token');
 
     const fetchData = () => {
-        axios.get(`https://noisemon.svec.co.th/api/data/test_SLM_MQTT_${selectedDevices}`)
+        axios.get(`${import.meta.env.VITE_API_URI}/api/data/test_SLM_MQTT_${selectedDevices}`, { headers: { Authorization: token } })
             .then(response => {
                 setData(response.data);
             })
@@ -137,31 +137,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
     return (
         <div>
-            {/* //     <Container >
-        //         <Row>
-        //             <Col > */}
-            {/* <Card bg="Light" text="dark" style={{ minWidth:'100px', width: '80%', maxWidth: '400px' }} className="mb-2" >
-                            <Card.Body>
-
-                                {filteredMessages.map((message, index) => (
-                                    <dl key={index}>
-                                        <dt>Name: {message.name}</dt>
-                                        <dt>Sound Level: {message.value} dBA</dt>
-                                        <dt>Status: {message.status}</dt>
-                                        <dt>Battery: 100%</dt>
-                                        <dt>Last Update: {message.timestamp}</dt>
-                                    </dl>
-                                ))}
-                            </Card.Body>
-                        </Card> */}
-            {/* </Col>
-                    <Col sm={8}>
-                        <Line className="chart" data={chartData} options={config} width={100} height={450} />
-                    </Col>
-                </Row>
-            </Container> */}
             <Line className="chart" data={chartData} options={config} width={100} height={450} />
-
         </div>
 
 
