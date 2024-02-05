@@ -5,6 +5,7 @@ import NavBar from '../components/NavBar';
 import DeviceList from '../components/DeviceList';
 import DeviceMap from '../components/DeviceMap';
 import AnotherComponent from '../components/AnotherComponent';
+import noiseEvent from '../components/noiseEvent';
 import axios from 'axios';
 import "leaflet/dist/leaflet.css";
 import "./Home.css";
@@ -66,14 +67,14 @@ function Home() {
 
       const filterMessage = receivedMessages.filter((el) => {
         return devices.some((f) => {
-          if (f.name === el.name) {
+          if (f.serial === el.serial) {
             el.lat = f.lat;
             el.lon = f.lon;
           }
-          return f.name === el.name;
+          return f.serial === el.serial;
         });
       });
-
+      
       setMessages(filterMessage);
     };
 
@@ -128,6 +129,16 @@ function Home() {
             <Card.Header>{selectedDevice} Graph</Card.Header>
             <Card.Body>
               <AnotherComponent selectedDevices={selectedDevice} messages={messages} />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row style={{ margin: '5px' }}>
+        <Col sm style={{ marginTop: '10px' }}>
+          <Card>
+            <Card.Header> Event</Card.Header>
+            <Card.Body>
+              <noiseEvent />
             </Card.Body>
           </Card>
         </Col>

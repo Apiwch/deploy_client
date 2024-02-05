@@ -18,6 +18,7 @@ function AnotherComponent({ selectedDevices, messages }) {
     const fetchData = () => {
         axios.get(`${import.meta.env.VITE_API_URI}/api/data/test_SLM_MQTT_${selectedDevices}`, { headers: { Authorization: token } })
             .then(response => {
+                
                 setData(response.data);
             })
             .catch(error => {
@@ -28,7 +29,6 @@ function AnotherComponent({ selectedDevices, messages }) {
     useEffect(() => {
         // Fetch data initially
         fetchData();
-
 
         // Set up interval to fetch data every 5 seconds (adjust as needed)
         const intervalId = setInterval(fetchData, 20000);
@@ -115,7 +115,7 @@ function AnotherComponent({ selectedDevices, messages }) {
                 }
             },
             y: {
-                min: 40,
+                min: 30,
                 display: true,
                 title: {
                     display: true,
