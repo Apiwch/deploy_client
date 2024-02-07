@@ -10,7 +10,7 @@ import axios from 'axios';
 import "leaflet/dist/leaflet.css";
 import "./Home.css";
 
-const OFFLINE_THRESHOLD = 5000;
+const OFFLINE_THRESHOLD = 50000;
 
 function Home() {
   const navigate = useNavigate();

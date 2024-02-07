@@ -69,18 +69,18 @@ function AnotherComponent({ selectedDevices, messages }) {
                 borderColor: 'rgba(86,26,16,1)',
                 // borderCapStyle: 'butt',
                 borderDash: [],
-                borderWidth: 0,
+                borderWidth: 2,
                 borderDashOffset: 0.0,
                 borderJoinStyle: 'miter',
                 pointBorderColor: 'rgba(86,26,16,1)',
                 pointBackgroundColor: '#fff',
-                pointBorderWidth: 0,
+                pointBorderWidth: 2,
                 pointHoverRadius: 0,
                 pointHoverBackgroundColor: 'rgba(86,26,16,1)',
                 pointHoverBorderColor: 'rgba(220,220,220,1)',
                 pointHoverBorderWidth: 0,
-                pointRadius: 0,
-                pointHitRadius: 0,
+                pointRadius: 3,
+                pointHitRadius: 3,
                 data: data.map(record => record.value),
 
             }
@@ -110,8 +110,8 @@ function AnotherComponent({ selectedDevices, messages }) {
                     unit: 'second',
                     tooltipFormat: 'HH:mm:ss'
                 },
-                min: new Date().setMinutes(new Date().getMinutes()-9),
-                max: new Date(),
+                min: new Date().setMinutes(new Date().getMinutes()-120),
+                max: new Date().setMinutes(new Date().getMinutes()),
                 display: true,
                 title: {
                     display: true,
@@ -134,6 +134,7 @@ function AnotherComponent({ selectedDevices, messages }) {
             },
             y: {
                 min: 30,
+                max: 100,
                 display: true,
                 title: {
                     display: true,
@@ -158,7 +159,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
         datasets: [
             {
-                label: 'LAeq(1min)',
+                label: 'LAeq(10min)',
                 fill: true,
                 lineTension: 5,
                 backgroundColor: 'rgba(0,153,76,0.5)',
@@ -175,8 +176,8 @@ function AnotherComponent({ selectedDevices, messages }) {
                 pointHoverBackgroundColor: 'rgba(0,153,76,1)',
                 pointHoverBorderColor: 'rgba(220,220,220,1)',
                 pointHoverBorderWidth: 7,
-                pointRadius: 5,
-                pointHitRadius: 5,
+                pointRadius: 3,
+                pointHitRadius: 3,
                 stepped: 'after',
                 data: leq.map(record => record.leq),
 
@@ -207,8 +208,8 @@ function AnotherComponent({ selectedDevices, messages }) {
                     unit: 'second',
                     tooltipFormat: 'HH:mm:ss'
                 },
-                min: new Date().setMinutes(new Date().getMinutes()-9),
-                max: new Date(),
+                min: new Date().setMinutes(new Date().getMinutes()-120),
+                max: new Date().setMinutes(new Date().getMinutes()),
                 display: true,
                 title: {
                     display: true,
@@ -231,6 +232,7 @@ function AnotherComponent({ selectedDevices, messages }) {
             },
             y: {
                 min: 30,
+                max: 100,
                 display: true,
                 title: {
                     display: true,
