@@ -9,11 +9,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-
 function AnotherComponent({ selectedDevices, messages }) {
     const [data, setData] = useState([]);
     const [leq, setLeq] = useState([]);
-    
+
 
     // Filter messages based on selected devices
     const token = localStorage.getItem('token');
@@ -21,7 +20,7 @@ function AnotherComponent({ selectedDevices, messages }) {
     const fetchData = () => {
         axios.get(`${import.meta.env.VITE_API_URI}/api/data/test_SLM_MQTT_${selectedDevices}`, { headers: { Authorization: token } })
             .then(response => {
-                
+
                 setData(response.data);
             })
             .catch(error => {
@@ -32,7 +31,7 @@ function AnotherComponent({ selectedDevices, messages }) {
     const fetchLeq = () => {
         axios.get(`${import.meta.env.VITE_API_URI}/api/leq/test_SLM_MQTT_${selectedDevices}event`, { headers: { Authorization: token } })
             .then(response => {
-                
+
                 setLeq(response.data);
             })
             .catch(error => {
@@ -73,14 +72,14 @@ function AnotherComponent({ selectedDevices, messages }) {
                 borderDashOffset: 0.0,
                 borderJoinStyle: 'miter',
                 pointBorderColor: 'rgba(86,26,16,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 2,
+                pointBackgroundColor: 'rgba(86,26,16,1)',
+                pointBorderWidth: 0,
                 pointHoverRadius: 0,
                 pointHoverBackgroundColor: 'rgba(86,26,16,1)',
                 pointHoverBorderColor: 'rgba(220,220,220,1)',
                 pointHoverBorderWidth: 0,
-                pointRadius: 3,
-                pointHitRadius: 3,
+                pointRadius: 1.4,
+                pointHitRadius: 0,
                 data: data.map(record => record.value),
 
             }
@@ -100,7 +99,11 @@ function AnotherComponent({ selectedDevices, messages }) {
                         size: 12
                     }
                 }
-            }
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false
+            },
         },
         scales: {
             x: {
@@ -110,7 +113,7 @@ function AnotherComponent({ selectedDevices, messages }) {
                     unit: 'second',
                     tooltipFormat: 'HH:mm:ss'
                 },
-                min: new Date().setMinutes(new Date().getMinutes()-120),
+                min: new Date().setMinutes(new Date().getMinutes() - 120),
                 max: new Date().setMinutes(new Date().getMinutes()),
                 display: true,
                 title: {
@@ -170,14 +173,14 @@ function AnotherComponent({ selectedDevices, messages }) {
                 borderDashOffset: 0,
                 borderJoinStyle: 'miter',
                 pointBorderColor: 'rgba(0,153,76,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 2,
-                pointHoverRadius: 2,
+                pointBackgroundColor: 'rgba(0,153,76,1)',
+                pointBorderWidth: 0,
+                pointHoverRadius: 0,
                 pointHoverBackgroundColor: 'rgba(0,153,76,1)',
                 pointHoverBorderColor: 'rgba(220,220,220,1)',
                 pointHoverBorderWidth: 7,
-                pointRadius: 3,
-                pointHitRadius: 3,
+                pointRadius: 1.4,
+                pointHitRadius: 0,
                 stepped: 'after',
                 data: leq.map(record => record.leq),
 
@@ -198,7 +201,12 @@ function AnotherComponent({ selectedDevices, messages }) {
                         size: 12
                     }
                 }
-            }
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false
+            },
+
         },
         scales: {
             x: {
@@ -208,7 +216,7 @@ function AnotherComponent({ selectedDevices, messages }) {
                     unit: 'second',
                     tooltipFormat: 'HH:mm:ss'
                 },
-                min: new Date().setMinutes(new Date().getMinutes()-120),
+                min: new Date().setMinutes(new Date().getMinutes() - 120),
                 max: new Date().setMinutes(new Date().getMinutes()),
                 display: true,
                 title: {
@@ -255,12 +263,12 @@ function AnotherComponent({ selectedDevices, messages }) {
     return (
         <div>
             <Col>
-            <Row style={{height: "500px"}}>
-            <Line className="chart" data={chartData} options={config} width={100} height={450} />
-            </Row>
-            <Row style={{height: "500px"}}>
-            <Line className="chart" data={chartLeq} options={configleq} width={100} height={450} />
-            </Row>
+                <Row style={{ height: "500px" }}>
+                    <Line className="chart" data={chartData} options={config} width={100} height={450} />
+                </Row>
+                <Row style={{ height: "500px" }}>
+                    <Line className="chart" data={chartLeq} options={configleq} width={100} height={450} />
+                </Row>
             </Col>
 
         </div>

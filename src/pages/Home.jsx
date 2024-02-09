@@ -133,7 +133,7 @@ function Home() {
           </Card>
         </Col>
       </Row>
-      <Row style={{ margin: '5px' }}>
+      {/* <Row style={{ margin: '5px' }}>
         <Col sm style={{ marginTop: '10px' }}>
           <Card>
             <Card.Header> Event</Card.Header>
@@ -142,7 +142,7 @@ function Home() {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 }
