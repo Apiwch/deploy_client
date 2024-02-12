@@ -61,7 +61,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
         datasets: [
             {
-                label: 'Sound Level',
+                label: 'Sound Level 10 minutes ago',
                 fill: true,
                 lineTension: 0.1,
                 backgroundColor: 'rgba(172,53,32,0.7)',
@@ -78,7 +78,7 @@ function AnotherComponent({ selectedDevices, messages }) {
                 pointHoverBackgroundColor: 'rgba(86,26,16,1)',
                 pointHoverBorderColor: 'rgba(220,220,220,1)',
                 pointHoverBorderWidth: 0,
-                pointRadius: 1.4,
+                pointRadius: 0,
                 pointHitRadius: 0,
                 data: data.map(record => record.value),
 
@@ -113,7 +113,7 @@ function AnotherComponent({ selectedDevices, messages }) {
                     unit: 'second',
                     tooltipFormat: 'HH:mm:ss'
                 },
-                min: new Date().setMinutes(new Date().getMinutes() - 120),
+                min: new Date().setMinutes(new Date().getMinutes() - 10),
                 max: new Date().setMinutes(new Date().getMinutes()),
                 display: true,
                 title: {
@@ -162,7 +162,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
         datasets: [
             {
-                label: 'LAeq(10min)',
+                label: 'LAeq(10min) 2 hours ago',
                 fill: true,
                 lineTension: 5,
                 backgroundColor: 'rgba(0,153,76,0.5)',
