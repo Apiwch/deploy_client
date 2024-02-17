@@ -43,7 +43,7 @@ function AnotherComponent({ selectedDevices, messages }) {
         // Fetch data initially
         fetchData();
         fetchLeq();
-        console.log(leq)
+
 
         // Set up interval to fetch data every 5 seconds (adjust as needed)
         const intervalId = setInterval(fetchData, 20000);

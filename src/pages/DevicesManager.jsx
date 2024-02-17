@@ -14,6 +14,7 @@ import L from 'leaflet';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import { jwtDecode } from "jwt-decode";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -24,6 +25,10 @@ L.Icon.Default.mergeOptions({
 
 
 function DevicesManager() {
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode(token);
+    const username = decoded.username;
+    const role = decoded.role
 
     const [data, setData] = useState([]);
     const [show, setShow] = useState(false);
@@ -35,9 +40,8 @@ function DevicesManager() {
     const [lon, setLon] = useState('');
     const [id, setId] = useState('');
     const [addMessage, setAddMessage] = useState('')
-    const username = localStorage.getItem('username');
     const [loginMessage, setLoginMessage] = useState('');
-    const token = localStorage.getItem('token');
+
 
     useEffect(() => {
         // Fetch data from the protected route using the stored token
@@ -200,7 +204,9 @@ function DevicesManager() {
                     <Card>
                         <Card.Header>Devices List</Card.Header>
                         <Card.Body>
-                            <Button variant="success" onClick={handleShow} style={{ padding: 10, marginBottom: 20 }}>Add New Device</Button>
+                            {role === 'admin' && (
+                                <Button variant="success" onClick={handleShow} style={{ padding: 10, marginBottom: 20 }}>Add New Device</Button>
+                            )}
                             <Table striped bordered hover responsive >
                                 <thead>
                                     <tr>
@@ -209,7 +215,9 @@ function DevicesManager() {
                                         <th>Serial Number</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
-                                        <th>Action</th>
+                                        {role === 'admin' && (
+                                            <th>Action</th>
+                                        )}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -220,10 +228,13 @@ function DevicesManager() {
                                             <td>{val.serial}</td>
                                             <td>{val.lat}</td>
                                             <td>{val.lon}</td>
-                                            <td>
-                                                <Button onClick={() => HandleEditDevice(val.name, val.serial, val.lat, val.lon, val.id)}>Edit</Button>{' '}
-                                                <Button variant="danger" onClick={() => HandleDelDevice(val.id)}>Delete</Button>
-                                            </td>
+                                            {role === 'admin' && (
+                                                <td>
+                                                    <Button onClick={() => HandleEditDevice(val.name, val.serial, val.lat, val.lon, val.id)}>Edit</Button>{' '}
+                                                    <Button variant="danger" onClick={() => HandleDelDevice(val.id)}>Delete</Button>
+                                                </td>
+                                            )}
+
                                         </tr>)
                                     })}
                                 </tbody>

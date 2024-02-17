@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Button } from 'react-bootstrap';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import DeviceList from '../components/DeviceList';
 import DeviceMap from '../components/DeviceMap';
@@ -9,18 +9,25 @@ import noiseEvent from '../components/noiseEvent';
 import axios from 'axios';
 import "leaflet/dist/leaflet.css";
 import "./Home.css";
+import { jwtDecode } from "jwt-decode";
+
+
 
 const OFFLINE_THRESHOLD = 50000;
 
 function Home() {
   const navigate = useNavigate();
-  const username = localStorage.getItem('username');
+  const token = localStorage.getItem('token');
+  const decoded = jwtDecode(token);
+  const username = decoded.username;
+  const role = decoded.role
   const [loginMessage, setLoginMessage] = useState('');
   const [devices, setDevices] = useState([]);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem('token');
+
   const [selectedDevice, setSelectedDevice] = useState('');
+
 
   const fetchLogin = async () => {
     try {
@@ -74,7 +81,7 @@ function Home() {
           return f.serial === el.serial;
         });
       });
-      
+
       setMessages(filterMessage);
     };
 
@@ -108,9 +115,11 @@ function Home() {
             <Card.Header>Devices List</Card.Header>
             <Card.Body>
               <DeviceList messages={messages} onItemClicked={handleItemClick} loading={loading} />
-              <Button variant="primary" style={{ marginTop: '10px' }}>
-                <Link style={{ color: 'white', textDecoration: 'none' }} to={"/devices"}>Devices Manager</Link>
-              </Button>
+              {/* {role === 'admin' && (
+                <Button variant="primary" style={{ marginTop: '10px' }}>
+                  <Link style={{ color: 'white', textDecoration: 'none' }} to={"/devices"}>Devices Manager</Link>
+                </Button>
+              )} */}
             </Card.Body>
           </Card>
         </Col>

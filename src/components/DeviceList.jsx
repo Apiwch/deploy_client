@@ -16,7 +16,7 @@ function DeviceList({ messages, onItemClicked, loading }) {
     return (
 
         <div className="scrollbar scrollbar-primary " >
-            <ListGroup style={{ height: 461 }}>
+            <ListGroup style={{ height: 508 }}>
                 {loading ?<h2><Spinner animation="border" variant="primary"/>loading</h2> :
                     messages.map((message, index) => (
                         <ListGroup.Item variant={message.status === 'Offline' ? 'danger' : 'primary'} key={index} action onClick={() => alertClicked(message.name)}>

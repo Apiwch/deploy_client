@@ -5,9 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button'; // Import Button component
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 
 function NavBar() {
-  const username = localStorage.getItem('username');
+  const token = localStorage.getItem('token');
+  const decoded = jwtDecode(token);
+  const username = decoded.username;
+  const role = decoded.role
   const handleLogout = () => {
 
     // Clear the stored token
@@ -18,6 +22,8 @@ function NavBar() {
     window.location.href = '/'
   };
 
+
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -26,22 +32,23 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             
-            <Nav.Link><Link style={{color: 'white', textDecoration: 'none'}} to={"/home"}>Home</Link></Nav.Link>
-            <Nav.Link><Link style={{color: 'white', textDecoration: 'none'}} to={"/devices"}>Devices Manager</Link></Nav.Link>
+            <Nav.Link><Link style={{ color: 'white', textDecoration: 'none' }} to={"/home"}>Home</Link></Nav.Link>
+            <Nav.Link><Link style={{ color: 'white', textDecoration: 'none' }} to={"/devices"}>Devices Manager</Link></Nav.Link>
+
           </Nav>
-        
-        <Navbar className="xl-auto">
-          <Navbar.Text style={{ color: 'white', paddingRight: 20 }} >
-            Signed in as: {username}
-          </Navbar.Text>
 
-        </Navbar>
-        <Navbar className="xl-auto">
+          <Navbar className="xl-auto">
+            <Navbar.Text style={{ color: 'white', paddingRight: 20 }} >
+              Signed in as: {username}
+            </Navbar.Text>
 
-          <Button variant="outline-light" onClick={handleLogout}>
-            Sign Out
-          </Button>
-        </Navbar>
+          </Navbar>
+          <Navbar className="xl-auto">
+
+            <Button variant="outline-light" onClick={handleLogout}>
+              Sign Out
+            </Button>
+          </Navbar>
         </Navbar.Collapse>
       </Container>
     </Navbar>
