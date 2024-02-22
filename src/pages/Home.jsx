@@ -13,7 +13,7 @@ import { jwtDecode } from "jwt-decode";
 
 
 
-const OFFLINE_THRESHOLD = 50000;
+const OFFLINE_THRESHOLD = 70000;
 
 function Home() {
   const navigate = useNavigate();

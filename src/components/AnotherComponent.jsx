@@ -41,7 +41,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
     useEffect(() => {
         // Fetch data initially
-        fetchData();
+        // fetchData();
         fetchLeq();
 
 
@@ -162,7 +162,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
         datasets: [
             {
-                label: 'LAeq(10min) 2 hours ago',
+                label: 'LAeq(1min) 5 hours ago',
                 fill: true,
                 lineTension: 5,
                 backgroundColor: 'rgba(0,153,76,0.5)',
@@ -216,7 +216,7 @@ function AnotherComponent({ selectedDevices, messages }) {
                     unit: 'second',
                     tooltipFormat: 'HH:mm:ss'
                 },
-                min: new Date().setMinutes(new Date().getMinutes() - 120),
+                min: new Date().setMinutes(new Date().getMinutes() - 300),
                 max: new Date().setMinutes(new Date().getMinutes()),
                 display: true,
                 title: {
@@ -263,9 +263,9 @@ function AnotherComponent({ selectedDevices, messages }) {
     return (
         <div>
             <Col>
-                <Row style={{ height: "500px" }}>
+                {/* <Row style={{ height: "500px" }}>
                     <Line className="chart" data={chartData} options={config} width={100} height={450} />
-                </Row>
+                </Row> */}
                 <Row style={{ height: "500px" }}>
                     <Line className="chart" data={chartLeq} options={configleq} width={100} height={450} />
                 </Row>

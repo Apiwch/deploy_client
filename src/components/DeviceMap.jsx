@@ -53,7 +53,7 @@ function DeviceMap({ messages, selectedDevice }) {
           <Tooltip direction="top" offset={[-15, -10]} opacity={1} permanent >
             <dl >
               <dt>Name: {message.name}</dt>
-              <dt>Sound Level: {message.value} dBA</dt>
+              <dt>LAeq (1 min): {message.valueLeq} dBA</dt>
               <dt>Status: {message.status}</dt>
             </dl>
           </Tooltip>
