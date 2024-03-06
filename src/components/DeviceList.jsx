@@ -27,14 +27,14 @@ function DeviceList({ messages, onItemClicked, loading }) {
                             </Row>
                             <Row>
                                 <Col>
-                                    <strong>LAeq (1 min):</strong> {message.valueLeq + ' dBA'}
+                                    <strong>Sound Level:</strong> {message.value + ' dBA'}
                                 </Col>
                             </Row>
-                            {/* <Row>
+                            <Row>
                                 <Col>
                                     <ProgressBar min={40} max={90} now={message.value} />
                                 </Col>
-                            </Row> */}
+                            </Row>
                             <Row>
                                 <Col>
                                     <strong>Status:</strong> {message.status}
