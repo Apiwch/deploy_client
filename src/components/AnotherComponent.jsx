@@ -41,7 +41,7 @@ function AnotherComponent({ selectedDevices, messages }) {
 
     useEffect(() => {
         // Fetch data initially
-        // fetchData();
+        fetchData();
         fetchLeq();
 
 
