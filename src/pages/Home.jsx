@@ -13,7 +13,7 @@ import { jwtDecode } from "jwt-decode";
 
 
 
-const OFFLINE_THRESHOLD = 70000;
+const OFFLINE_THRESHOLD = 5000;
 
 function Home() {
   const navigate = useNavigate();
@@ -94,7 +94,7 @@ function Home() {
   function checkStatus(device) {
     const currentTimestamp = new Date();
     const deviceTimestamp = new Date(device.timestamp.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}:\d{2}:\d{2})/, '$3-$2-$1T$4'));
-
+    console.log(currentTimestamp-deviceTimestamp)
     if (currentTimestamp - deviceTimestamp > OFFLINE_THRESHOLD) {
       return 'Offline';
     } else {
